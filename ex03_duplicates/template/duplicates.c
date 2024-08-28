@@ -7,7 +7,8 @@ bool has_duplicates_slow(int *a, int n)
 {
     for (int i = 0;  i < n;  i++) {
         for (int j = i+1;  j < n;  j++) {
-            if (a[i] == a[j]) {
+            // TODO: Replace 'true' with a proper test for a duplicate
+            if (true) {
                 return true;
             }
         }
@@ -17,14 +18,16 @@ bool has_duplicates_slow(int *a, int n)
 
 
 bool has_duplicates_fast(int *a, int n) {
-    bool *seen = calloc(n*n, sizeof(bool));
-    // bool *seen = malloc(n*n * sizeof(bool));
+    bool *seen = calloc(n, sizeof(bool));
     for (int i = 0;  i < n;  i++) {
-        if (seen[a[i]] == true) {
+        // TODO: Replace 'true' with a test to determine if the
+        // current element has been seen before
+        if (true) {
             free(seen);
             return true;
         }
-        seen[a[i]] = true;
+        // TODO: Update the seen array 
+        // (for the case where element is seen for the first time)
     }
     free(seen);
     return false;

@@ -2,11 +2,13 @@
 #include <stdio.h>
 #include <time.h>
 
-#define SIZE (1<<12)
+#define SIZE (1<<15)
+// #define SIZE 32768
 
 int main()
 {
-    int array[SIZE];
+    int *array = malloc(SIZE * sizeof(int));
+
     for (int i = 0;  i < SIZE;  i++) {
         array[i] = i;
     }
@@ -35,4 +37,6 @@ int main()
     } else {
         printf("no duplicates\n");
     }
+
+    free(array);
 }

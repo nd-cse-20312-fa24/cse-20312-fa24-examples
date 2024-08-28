@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <assert.h>
 
-int array_nodup[4] = {1, 2, 4, 8};
-int array_dup[4]   = {1, 2, 8, 8};
+int array_nodup[4] = {0, 1, 2, 3};
+int array_dup[4]   = {0, 1, 2, 2};
 
 int test_00_has_duplicates_slow() {
     assert(has_duplicates_slow(array_dup, 4) == true);
