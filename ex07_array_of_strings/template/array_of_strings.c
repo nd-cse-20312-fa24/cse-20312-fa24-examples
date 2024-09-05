@@ -17,14 +17,14 @@ char  **read_user_data(FILE *stream, int nstrings) {
 
     // Allocate a string array for up to nstrings strings
     // that is inicialized to all zeros
-    // TODO: replace NULL
+    // TODO: replace NULL with correct expression
     char **sarray = NULL;
 
     int i = 0;
     while (fgets(buffer, 80, stream)) {
         chomp(buffer);
 
-        // Duplicate the string in the buffer and insert it in sarray
+        // Duplicate the string in the buffer and insert it in sarray at index i
         // Increment the array index
         // TODO
     }
