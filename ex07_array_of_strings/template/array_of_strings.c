@@ -16,7 +16,7 @@ char  **read_user_data(FILE *stream, int nstrings) {
     char buffer[80];
 
     // Allocate a string array for up to nstrings strings
-    // that is inicialized to all zeros
+    // that is initialized to all zeros
     // TODO: replace NULL with correct expression
     char **sarray = NULL;
 
