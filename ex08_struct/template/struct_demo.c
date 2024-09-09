@@ -8,7 +8,7 @@ typedef struct {
 } Person;
 
 int main() {
-    // Allocate a Person as a local variable
+    // Declare a Person as a local variable
     Person p;
 
     // Set name to "James" and age to 20
@@ -20,7 +20,7 @@ int main() {
     
     // Set name to "Madison" and age to 21
     // TODO:
-    
+
 
     // Print the sizes of the structs
     printf("sizeof(p):      %lu\n", sizeof(p));

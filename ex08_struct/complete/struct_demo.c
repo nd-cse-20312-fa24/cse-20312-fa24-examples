@@ -8,7 +8,7 @@ typedef struct {
 } Person;
 
 int main() {
-    // Allocate a Person as a local variable
+    // Declare a Person as a local variable
     Person p;
 
     // Set name to "James" and age to 20
