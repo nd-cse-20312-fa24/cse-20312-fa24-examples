@@ -40,7 +40,9 @@ def main():
             print("Cleared the BST.")
         # insert
         elif command.startswith("ins"):
+            # Turn the rest of the command line into a single string
             arg_string = " ".join(command_line[1:])
+            # Evaluate the string as a Python literal
             arg = ast.literal_eval(arg_string)
             bst.insert(arg)
             print(f"Inserted {arg} into the BST.")
