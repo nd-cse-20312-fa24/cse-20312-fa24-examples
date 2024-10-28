@@ -1,57 +1,78 @@
 #!/usr/bin/env python3
 
-from bst import Node, Bst
+from bst import BSTree
+import ast
 
 def print_help():
     print("Commands:")
-    print("  (i)nsert <value>")
-    print("  (co)ntains <value>")
-    print("  (t)raverse inorder")
-    print("  (cl)ear")
-    print("  (r)emove <value>")
-    print("  (hei)ght")
-    print("  (hel)p")
     print("  (q)uit")
+    print("  (hel)p")
+    print("  (cle)ar")
+    print("  (ins)ert <value>")
+    print("  (con)tains <value>")
+    print("  (ino)rder")
+    print("  (len)gth")
+    print("  (hei)ght")
+    print("  (rem)ove <value>")
+    print("  (wbf)s <list>--write to BFS list")
+    print("  (pri)nt")
     print()
 
 def main():
-    bst = Bst()
+    bst = BSTree()
     print_help()
+
     while True:
-        command = input("Enter command or (hel)p: ").strip().lower().split()
-        if command[0].startswith("q"):
+        command_line = input("Enter command or (hel)p: ").strip().split()
+        if not command_line:
+            continue
+        command = command_line[0].lower()
+        
+        # quit
+        if command.startswith("q"):
             break
-        elif command[0].startswith("hel"):
+        # help
+        elif command.startswith("hel"):
             print_help()
-        elif command[0].startswith("i"):
-            try:
-                value = int(command[1])
-                bst.insert(value)
-                print(f"Inserted {value} into the BST.")
-                print(bst)
-            except ValueError:
-                print("Invalid value. Please enter an integer.")
-        elif command[0].startswith("r"):
-            try:
-                value = int(command[1])
-                bst.remove(value)
-                print(f"Deleted {value} from the BST.")
-                print(bst)
-            except ValueError:
-                print("Invalid value. Please enter an integer.")
-        elif command[0].startswith("co"):
-            try:
-                value = int(command[1])
-                print(value in bst)
-            except ValueError:
-                print("Invalid value. Please enter an integer.")
-        elif command[0].startswith("cl"):
+        # clear
+        elif command.startswith("cle"):
             bst.clear()
-            print("BST cleared.")
-        elif command[0].startswith("t"):
+            print("Cleared the BST.")
+        # insert
+        elif command.startswith("ins"):
+            arg_string = " ".join(command_line[1:])
+            arg = ast.literal_eval(arg_string)
+            bst.insert(arg)
+            print(f"Inserted {arg} into the BST.")
+            print(bst)
+        # contains
+        elif command.startswith("con"):
+            arg_string = " ".join(command_line[1:])
+            arg = ast.literal_eval(arg_string)
+            print(arg in bst)
+        # inorder
+        elif command.startswith("ino"):
             print(bst.inorder())
-        elif command[0].startswith("hei"):
+        # len
+        elif command.startswith("len"):
+            print(len(bst))
+        # height
+        elif command.startswith("hei"):
             print(bst.height())
+        # remove
+        elif command.startswith("rem"):
+            arg_string = " ".join(command_line[1:])
+            arg = ast.literal_eval(arg_string)
+            bst.remove(arg)
+            print(f"Deleted {arg} from the BST.")
+            print(bst)
+        # write_bfs
+        elif command.startswith("wbf"):
+            print(bst.write_bfs())
+        # print
+        elif command.startswith("pri"):
+            print(bst)
+
         else:
             print("Invalid command")
             print_help()
