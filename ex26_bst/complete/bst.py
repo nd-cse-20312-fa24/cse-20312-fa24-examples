@@ -25,6 +25,10 @@ class BSTree:
     def _insert(self, root, key):
         if root is None:
             return Node(key)
+        
+        if key == root.key:
+            return root
+        
         if key < root.key:
             root.left = self._insert(root.left, key)
         else:
@@ -52,12 +56,12 @@ class BSTree:
     def _inorder(self, root):
         if not root:
             return []
-        if root:
-            return (
-                self._inorder(root.left) + 
-                [root.key] + 
-                self._inorder(root.right))
 
+        return (
+            self._inorder(root.left) + 
+            [root.key] + 
+            self._inorder(root.right))
+    
     # Magic method: et the length of the tree 
     # Suport for the len() function 
     def __len__(self):
