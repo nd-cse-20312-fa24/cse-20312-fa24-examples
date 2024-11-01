@@ -107,6 +107,7 @@ class BSTree:
         # Key is found
         else:
             # Node with only one child or leaf node: return the non-null child
+            # If the node has no children, return None
             if root.left is None:
                 return root.right
             if root.right is None:
@@ -114,6 +115,7 @@ class BSTree:
             
             # Node with two children: Get the inorder successor (smallest in the right subtree)
             root.key = self._min_value_node(root.right)
+            # Delete the inorder successor
             root.right = self._remove(root.right, root.key)
         return root
     
