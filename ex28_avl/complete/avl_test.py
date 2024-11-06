@@ -60,6 +60,11 @@ class AvlTest(unittest.TestCase):
 
     def test_rebalance(self):
         # Left-left case
+        #     3
+        #    /
+        #   2
+        #  /
+        # 1
         root = Node(3)
         root.height = 2
         root.left = Node(2)
@@ -68,7 +73,13 @@ class AvlTest(unittest.TestCase):
         avl = AVLTree(root)
         avl.root = avl._rebalance(avl.root, 1)
         self.assertEqual(avl.write_bfs(), [2, 1, 3])
+
         # Left-right case
+        #   __3
+        #  /
+        # 1
+        #  \
+        #   2
         root = Node(3)
         root.height = 2
         root.left = Node(1)
@@ -77,7 +88,13 @@ class AvlTest(unittest.TestCase):
         avl = AVLTree(root)
         avl.root = avl._rebalance(avl.root, 2)
         self.assertEqual(avl.write_bfs(), [2, 1, 3])
+
         # Right-right case
+        # 1
+        #  \
+        #   2
+        #    \
+        #     3
         root = Node(1)
         root.height
         root.right = Node(2)
@@ -86,7 +103,13 @@ class AvlTest(unittest.TestCase):
         avl = AVLTree(root)
         avl.root = avl._rebalance(avl.root, 3)
         self.assertEqual(avl.write_bfs(), [2, 1, 3])
+
         # Right-left case
+        # 1__
+        #    \
+        #     3
+        #    /
+        #   2
         root = Node(1)
         root.height = 2
         root.right = Node(3)
@@ -136,43 +159,6 @@ class AvlTest(unittest.TestCase):
         avl.insert(2)
         avl.insert(1)
         self.assertEqual(avl.write_bfs(), [3, 2, 5, 1, None, 4, 6])
-
-    def test_contains(self):
-        avl = AVLTree()
-        avl.insert(30)
-        self.assertTrue(30 in avl)
-        avl.insert(10)
-        self.assertTrue(10 in avl)
-        avl.insert(50)
-        self.assertTrue(50 in avl)
-        avl.insert(20)
-        self.assertTrue(20 in avl)
-        avl.insert(40)
-        self.assertTrue(40 in avl)
-        avl.insert(70)
-        self.assertTrue(70 in avl)
-        avl.insert(60)
-        self.assertTrue(60 in avl)
-        self.assertFalse(0 in avl)
-        self.assertFalse(100 in avl)
-
-    def test_inorder(self):
-        avl = AVLTree()
-        self.assertEqual(avl.inorder(), [])
-        avl.insert(30)
-        self.assertEqual(avl.inorder(), [30])
-        avl.insert(10)
-        self.assertEqual(avl.inorder(), [10, 30])
-        avl.insert(50)
-        self.assertEqual(avl.inorder(), [10, 30, 50])
-        avl.insert(20)
-        self.assertEqual(avl.inorder(), [10, 20, 30, 50])
-        avl.insert(40)
-        self.assertEqual(avl.inorder(), [10, 20, 30, 40, 50])
-        avl.insert(70)
-        self.assertEqual(avl.inorder(), [10, 20, 30, 40, 50, 70])
-        avl.insert(60)
-        self.assertEqual(avl.inorder(), [10, 20, 30, 40, 50, 60, 70])
     
     def test_min_value_node(self):
         avl = AVLTree()

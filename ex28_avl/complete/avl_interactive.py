@@ -9,10 +9,8 @@ def print_help():
     print("  (hel)p")
     print("  (cle)ar")
     print("  (ins)ert <value>")
-    print("  (con)tains <value>")
-    print("  (ino)rder")
     print("  (rem)ove <value>")
-    print("  (wbf)s <list>--write to BFS list")
+    print("  (wbf)s--write to BFS list")
     print("  (pri)nt")
     print()
 
@@ -45,14 +43,6 @@ def main():
             avl.insert(arg)
             print(f"Inserted {arg} into the avl.")
             print(avl)
-        # contains
-        elif command.startswith("con"):
-            arg_string = " ".join(command_line[1:])
-            arg = ast.literal_eval(arg_string)
-            print(arg in avl)
-        # inorder
-        elif command.startswith("ino"):
-            print(avl.inorder())
         # remove
         elif command.startswith("rem"):
             arg_string = " ".join(command_line[1:])

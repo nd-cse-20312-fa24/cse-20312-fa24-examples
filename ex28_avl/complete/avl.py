@@ -26,31 +26,7 @@ class AVLTree:
         if not root:
             return 0
         return self._get_height(root.left) - self._get_height(root.right)
-
-    def _rebalance(self, root, key):
-        balance = self._get_balance(root)
-
-        # Case 1 - Left Left
-        if balance > 1 and key < root.left.key:
-            print(f"Left Left at {root.key}")
-            return self._right_rotate(root)
-        # Case 2 - Right Right
-        if balance < -1 and key > root.right.key:
-            print(f"Right Right at {root.key}")
-            return self._left_rotate(root)
-        # Case 3 - Left Right
-        if balance > 1 and key > root.left.key:
-            print(f"Left Right at {root.key}")
-            root.left = self._left_rotate(root.left)
-            return self._right_rotate(root)
-        # Case 4 - Right Left
-        if balance < -1 and key < root.right.key:
-            print(f"Right Left at {root.key}")
-            root.right = self._right_rotate(root.right)
-            return self._left_rotate(root)
-
-        return root
-
+    
     def _left_rotate(self, z):
         """
         Example:
@@ -68,12 +44,14 @@ class AVLTree:
            / \
           T1  T2
         """
+        # Do the rotation
         y = z.right
         T2 = y.left
 
         y.left = z
         z.right = T2
 
+        # Update the heights
         z.height = 1 + max(self._get_height(z.left), self._get_height(z.right))
         y.height = 1 + max(self._get_height(y.left), self._get_height(y.right))
 
@@ -96,23 +74,75 @@ class AVLTree:
                / \
               T2  T3
         """
+        # Do the rotation
         y = z.left
         T2 = y.right
 
         y.right = z
         z.left = T2
 
+        # Update the heights
         z.height = 1 + max(self._get_height(z.left), self._get_height(z.right))
         y.height = 1 + max(self._get_height(y.left), self._get_height(y.right))
 
         return y
-    
+
+    def _rebalance(self, root, key):
+        # root: root of the tree
+        # key: key of the node that was inserted or removed
+        balance = self._get_balance(root)
+
+        # Case 1 - Left Left
+        #     3 (root)
+        #    /
+        #   2
+        #  /
+        # 1 (key)
+        if balance > 1 and key < root.left.key:
+            print(f"Left Left at {root.key}")
+            return self._right_rotate(root)
+        
+        # Case 2 - Right Right
+        # 1 (root)
+        #  \
+        #   2
+        #    \
+        #     3 (key)
+        if balance < -1 and key > root.right.key:
+            print(f"Right Right at {root.key}")
+            return self._left_rotate(root)
+        
+        # Case 3 - Left Right
+        #   __3 (root)
+        #  /
+        # 1
+        #  \
+        #   2 (key)
+        if balance > 1 and key > root.left.key:
+            print(f"Left Right at {root.key}")
+            root.left = self._left_rotate(root.left)
+            return self._right_rotate(root)
+        
+        # Case 4 - Right Left
+        # 1__ (root)
+        #    \
+        #     3
+        #    /
+        #   2 (key)
+        if balance < -1 and key < root.right.key:
+            print(f"Right Left at {root.key}")
+            root.right = self._right_rotate(root.right)
+            return self._left_rotate(root)
+
+        return root
+
     # Insert a Node with a given key into the tree
     def insert(self, key):
         self.root = self._insert(self.root, key)
 
     # Helper function for insert
     def _insert(self, root, key):
+        # Regular BST insertion
         if root is None:
             return Node(key)
         
@@ -124,36 +154,11 @@ class AVLTree:
         else:
             root.right = self._insert(root.right, key)
 
+        # Update the height of the current node
         root.height = 1 + max(self._get_height(root.left), self._get_height(root.right))
 
+        # Rebalance the tree
         return self._rebalance(root, key)
-    
-    # Magic method: check if the tree contains a key
-    # Support for the 'in' operator
-    def __contains__(self, key):
-        return self._search(self.root, key) is not None
-    
-    # Helper function for contains
-    def _search(self, root, key):
-        if root is None or root.key == key:
-            return root
-        if key < root.key:
-            return self._search(root.left, key)
-        return self._search(root.right, key)  
-    
-    # Inorder traversal
-    def inorder(self):
-        return self._inorder(self.root)
-
-    # Helper function for inorder
-    def _inorder(self, root):
-        if not root:
-            return []
-
-        return (
-            self._inorder(root.left) + 
-            [root.key] + 
-            self._inorder(root.right))
     
 
     # Remove a Node with a given key from the tree  
@@ -162,6 +167,7 @@ class AVLTree:
     
     # Helper function for remove
     def _remove(self, root, key):
+        # Regular BST removal
         if root is None:
             return root
         
@@ -184,9 +190,11 @@ class AVLTree:
             root.key = self._min_value_node(root.right)
             # Delete the inorder successor
             root.right = self._remove(root.right, root.key)
-                
+
+        # Update the height of the current node      
         root.height = 1 + max(self._get_height(root.left), self._get_height(root.right))
 
+        # Rebalance the tree
         return self._rebalance(root, key)
     
     # Helper function to find the minimum value node in a tree
