@@ -17,16 +17,19 @@ class AVLTree:
     def clear(self):
         self.root = None
 
+    # Helper function to get the height of a node for AVL balancing
     def _get_height(self, root):
         if not root:
             return -1
         return root.height
 
+    # Helper function to get the balance factor of a node
     def _get_balance(self, root):
         if not root:
             return 0
         return self._get_height(root.left) - self._get_height(root.right)
     
+    # Helper functions to rotate left for AVL balancing
     def _left_rotate(self, z):
         """
         Example:
@@ -55,8 +58,10 @@ class AVLTree:
         z.height = 1 + max(self._get_height(z.left), self._get_height(z.right))
         y.height = 1 + max(self._get_height(y.left), self._get_height(y.right))
 
+        # Return the new root
         return y
 
+    # Helper functions to rotate right for AVL balancing
     def _right_rotate(self, z):
         """
         Example:
@@ -85,8 +90,10 @@ class AVLTree:
         z.height = 1 + max(self._get_height(z.left), self._get_height(z.right))
         y.height = 1 + max(self._get_height(y.left), self._get_height(y.right))
 
+        # Return the new root
         return y
 
+    # Helper function to rebalance the tree after insertion or removal
     def _rebalance(self, root, key):
         # root: root of the tree
         # key: key of the node that was inserted or removed
@@ -160,7 +167,6 @@ class AVLTree:
         # Rebalance the tree
         return self._rebalance(root, key)
     
-
     # Remove a Node with a given key from the tree  
     def remove(self, key):
         self.root = self._remove(self.root, key)
