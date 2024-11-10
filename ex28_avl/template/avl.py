@@ -20,16 +20,12 @@ class AVLTree:
     # Helper function to get the height of a node for AVL balancing
     # Note: The height of a null node is -1
     def _get_height(self, root):
-        if not root:
-            return -1
-        return root.height
+        pass
 
     # Helper function to get the balance factor of a node
     # Note: The balance factor of a null node is 0
     def _get_balance(self, root):
-        if not root:
-            return 0
-        return self._get_height(root.left) - self._get_height(root.right)
+        pass
     
     # Helper functions to rotate left for AVL balancing
     def _left_rotate(self, z):
@@ -50,18 +46,13 @@ class AVLTree:
           T1  T2
         """
         # Do the rotation
-        y = z.right
-        T2 = y.left
-
-        y.left = z
-        z.right = T2
+        pass
 
         # Update the heights
-        z.height = 1 + max(self._get_height(z.left), self._get_height(z.right))
-        y.height = 1 + max(self._get_height(y.left), self._get_height(y.right))
+        pass
 
         # Return the new root
-        return y
+        pass
 
     # Helper functions to rotate right for AVL balancing
     def _right_rotate(self, z):
@@ -109,7 +100,7 @@ class AVLTree:
         # 1 (key)
         if balance > 1 and key < root.left.key:
             print(f"Left Left at {root.key}")
-            return self._right_rotate(root)
+            pass
         
         # Case 2 - Right Right
         # 1 (root)
@@ -119,7 +110,7 @@ class AVLTree:
         #     3 (key)
         if balance < -1 and key > root.right.key:
             print(f"Right Right at {root.key}")
-            return self._left_rotate(root)
+            pass
         
         # Case 3 - Left Right
         #   __3 (root)
@@ -129,8 +120,7 @@ class AVLTree:
         #   2 (key)
         if balance > 1 and key > root.left.key:
             print(f"Left Right at {root.key}")
-            root.left = self._left_rotate(root.left)
-            return self._right_rotate(root)
+            pass
         
         # Case 4 - Right Left
         # 1__ (root)
@@ -140,8 +130,7 @@ class AVLTree:
         #   2 (key)
         if balance < -1 and key < root.right.key:
             print(f"Right Left at {root.key}")
-            root.right = self._right_rotate(root.right)
-            return self._left_rotate(root)
+            pass
 
         return root
 
