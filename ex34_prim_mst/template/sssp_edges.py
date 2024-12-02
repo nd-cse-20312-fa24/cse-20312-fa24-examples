@@ -54,7 +54,8 @@ def compute_sssp(graph: Graph, origin: str) -> dict[str, str]:
             if not neighbor in visited:
                 # Push the neighbor to the frontier as a tuple 
                 # (total distance from origin, vertex, predecessor)
-                heapq.heappush(frontier, (distance + weight, neighbor, vertex))
+                # TODO:
+                pass
 
     # Delete origin vertex from visited list to be returned
     del visited[origin]
@@ -70,8 +71,8 @@ def reconstruct_path(visited: dict[str, str], origin: str, destination: str) -> 
         # and update the current vertex to its predecessor.
         # Note that the order of the path in the list is reversed,
         # so the path will be reversed before returning.
-        path.append(curr)
-        curr = visited[curr]
+        # TODO:
+        pass
 
     path.append(origin)
     return reversed(path)

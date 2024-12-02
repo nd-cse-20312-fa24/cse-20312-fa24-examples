@@ -50,14 +50,15 @@ def compute_mst(graph: Graph, origin: str) -> tuple[int, dict[str, str]]:
             continue
 
         # add vertex:source to the visited list and update total weight
-        visited[vertex] = source
-        total_weight += weight
+        # TODO:
+        pass
 
         for neighbor, weight in graph[vertex].items():
             if not neighbor in visited:
                 # Push the neighbor to the frontier as a tuple
                 # (weight from predecessor, vertex, predecessor)
-                heapq.heappush(frontier, (weight, neighbor, vertex))
+                # TODO:
+                pass
 
     # Delete origin vertex from visited list to be returned
     del visited[origin]
