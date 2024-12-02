@@ -68,15 +68,14 @@ def compute_mst(graph: Graph, origin: str) -> tuple[int, dict[str, str]]:
 def main(args=None) -> None:
     if args is None:
         args = sys.argv[1:]
-    if len(args) != 1:
-        print('Usage: python mst_prim.py graph.txt')
+    if len(args) != 2:
+        print('Usage:  mst_prim.py graph_file origin')
         sys.exit(1)
 
     with open(args[0], 'r') as stream:
         graph = read_graph(stream)
     
-    # Arbitrarily choose origin vertex as the minimum vertex
-    origin = min(graph)
+    origin = args[1]
 
     # MST
     mst_length, mst_edges = compute_mst(graph, origin)
